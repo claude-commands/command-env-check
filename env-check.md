@@ -12,12 +12,14 @@ Run comprehensive environment check for the current project.
 **Usage:** `/env-check [focus]`
 
 **Examples:**
+
 - `/env-check` - Full environment verification
 - `/env-check --tools` - Check required tools only
 - `/env-check --env` - Check environment variables only
 - `/env-check --services` - Check service connections only
 
 **Workflow:**
+
 1. Detect project type and requirements
 2. Verify required tools and versions
 3. Check environment variables
@@ -45,10 +47,11 @@ Run focused environment check.
 1. **Detect Project Type**
 
    Check for:
+
    ```bash
    # Identify project type
    ls package.json go.mod requirements.txt Cargo.toml pyproject.toml Gemfile 2>/dev/null
-   ```
+   ```text
 
    Determine:
    - Primary language (Node, Go, Python, Rust)
@@ -67,6 +70,7 @@ Run focused environment check.
 3. **Verify Required Tools**
 
    **Core Tools:**
+
    ```bash
    # Git
    git --version
@@ -79,9 +83,10 @@ Run focused environment check.
    python --version 2>/dev/null
    pip --version 2>/dev/null
    cargo --version 2>/dev/null
-   ```
+   ```text
 
    **Common Dev Tools:**
+
    ```bash
    # Docker
    docker --version 2>/dev/null
@@ -96,11 +101,12 @@ Run focused environment check.
    aws --version 2>/dev/null
    gcloud --version 2>/dev/null
    az --version 2>/dev/null
-   ```
+   ```text
 
 4. **Check Version Requirements**
 
    Compare installed vs required:
+
    ```bash
    # Node version from .nvmrc
    cat .nvmrc 2>/dev/null
@@ -109,7 +115,7 @@ Run focused environment check.
    # Go version from go.mod
    grep "^go " go.mod 2>/dev/null
    go version
-   ```
+   ```text
 
    Flag mismatches:
    - Major version difference = Critical
@@ -119,16 +125,18 @@ Run focused environment check.
 5. **Verify Environment Variables**
 
    Check for `.env.example` or documentation:
+
    ```bash
    # Find example env file
    cat .env.example 2>/dev/null || cat .env.sample 2>/dev/null
-   ```
+   ```text
 
    Compare with actual `.env`:
+
    ```bash
    # Check which vars are set
    cat .env 2>/dev/null | grep -v '^#' | cut -d= -f1
-   ```
+   ```text
 
    Identify:
    - Missing required variables
@@ -138,6 +146,7 @@ Run focused environment check.
 6. **Test Service Connections**
 
    **Database:**
+
    ```bash
    # PostgreSQL
    pg_isready -h localhost -p 5432 2>/dev/null
@@ -150,34 +159,38 @@ Run focused environment check.
 
    # Redis
    redis-cli ping 2>/dev/null
-   ```
+   ```text
 
    **Check from env vars:**
+
    ```bash
    # Test DATABASE_URL connection
    # Parse and test connection string
-   ```
+   ```text
 
 7. **Verify Dependencies**
 
    **Node.js:**
+
    ```bash
    # Check if node_modules exists and matches lockfile
    npm ls --depth=0 2>/dev/null
    npm ci --dry-run 2>/dev/null
-   ```
+   ```text
 
    **Go:**
+
    ```bash
    # Verify modules
    go mod verify 2>/dev/null
-   ```
+   ```text
 
    **Python:**
+
    ```bash
    # Check installed packages
    pip check 2>/dev/null
-   ```
+   ```text
 
 8. **Check Docker Status**
 
@@ -187,7 +200,7 @@ Run focused environment check.
 
    # Are required containers running?
    docker-compose ps 2>/dev/null
-   ```
+   ```text
 
 9. **Generate Environment Report**
 
@@ -221,7 +234,7 @@ Run focused environment check.
    ```bash
    # Add to .env:
    STRIPE_KEY=sk_test_...
-   ```
+   ```text
 
    ## Service Connections
 
@@ -232,9 +245,10 @@ Run focused environment check.
    | Elasticsearch | ❌ Not Running | Port 9200 refused |
 
    **Start services:**
+
    ```bash
    docker-compose up -d elasticsearch
-   ```
+   ```text
 
    ## Dependencies
 
@@ -247,15 +261,18 @@ Run focused environment check.
    ## Issues Found
 
    ### 1. Missing Environment Variable
+
    - **Variable**: `STRIPE_KEY`
    - **Required for**: Payment processing
    - **Fix**: Add to `.env` file
 
    ### 2. Elasticsearch Not Running
+
    - **Port**: 9200
    - **Fix**: `docker-compose up -d elasticsearch`
 
    ### 3. JWT_SECRET Using Default
+
    - **Risk**: Security vulnerability in production
    - **Fix**: Generate secure secret: `openssl rand -hex 32`
 
@@ -276,17 +293,19 @@ Run focused environment check.
 
    # Start dev server
    npm run dev
-   ```
+   ```text
 
    ## Verification
 
    After fixing issues, run:
+
    ```bash
    npm run dev
    # or
    npm test
-   ```
-   ```
+   ```text
+
+   ```text
 
 10. **Provide Fix Commands**
 
@@ -317,7 +336,7 @@ Run focused environment check.
 
 ## Quick Setup
 [Commands to get running]
-```
+```text
 
 ## Status Icons
 

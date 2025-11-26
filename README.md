@@ -10,16 +10,16 @@ git clone git@github.com:claude-commands/command-env-check.git <clone-path>/comm
 
 # Symlink (use full path to cloned repo)
 ln -s <clone-path>/command-env-check/env-check.md ~/.claude/commands/env-check.md
-```
+```text
 
 ## Usage
 
-```
+```text
 /env-check              # Full environment verification
 /env-check --tools      # Check required tools only
 /env-check --env        # Check environment variables only
 /env-check --services   # Check service connections only
-```
+```text
 
 ## What it does
 
@@ -56,8 +56,9 @@ ln -s <clone-path>/command-env-check/env-check.md ~/.claude/commands/env-check.m
 ```bash
 docker-compose up -d
 npm install
-```
-```
+```text
+
+```text
 
 ## Status Icons
 
@@ -76,4 +77,4 @@ npm install
 
 ```bash
 cd <clone-path>/command-env-check && git pull
-```
+```text
